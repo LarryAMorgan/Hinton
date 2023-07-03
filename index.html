@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Hinton Orchards, Earnscleugh</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Fruittypes_1.js"></script>
+        <script src="data/Blockoverview_2.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-45.26258181738144,169.2716246688868],[-45.21013661137451,169.39488938440073]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 22
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Fruittypes_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Orchard</th>\
+                        <td>' + (feature.properties['Orchard'] !== null ? autolinker.link(feature.properties['Orchard'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fruit type</th>\
+                        <td>' + (feature.properties['Fruit_type'] !== null ? autolinker.link(feature.properties['Fruit_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Variety</th>\
+                        <td>' + (feature.properties['Variety'] !== null ? autolinker.link(feature.properties['Variety'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Category</th>\
+                        <td>' + (feature.properties['Category'] !== null ? autolinker.link(feature.properties['Category'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Row number</th>\
+                        <td>' + (feature.properties['Row_num'] !== null ? autolinker.link(feature.properties['Row_num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total rows</th>\
+                        <td>' + (feature.properties['Row_total'] !== null ? autolinker.link(feature.properties['Row_total'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area</th>\
+                        <td>' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Fruittypes_1_0(feature) {
+            switch(String(feature.properties['Fruit_type'])) {
+                case 'Apricot':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,115,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bare land':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bare land - undeveloped':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(85,255,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cherry':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,230,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Feijoa':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,152,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kiwifruit':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nectarine':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Peach':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,169,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Plum':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,77,168,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Unknown':
+                    return {
+                pane: 'pane_Fruittypes_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(168,0,132,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Fruittypes_1');
+        map.getPane('pane_Fruittypes_1').style.zIndex = 401;
+        map.getPane('pane_Fruittypes_1').style['mix-blend-mode'] = 'normal';
+        var layer_Fruittypes_1 = new L.geoJson(json_Fruittypes_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Fruittypes_1',
+            layerName: 'layer_Fruittypes_1',
+            pane: 'pane_Fruittypes_1',
+            onEachFeature: pop_Fruittypes_1,
+            style: style_Fruittypes_1_0,
+        });
+        bounds_group.addLayer(layer_Fruittypes_1);
+        map.addLayer(layer_Fruittypes_1);
+        function pop_Blockoverview_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Orchard'] !== null ? autolinker.link(feature.properties['Orchard'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fruit_type'] !== null ? autolinker.link(feature.properties['Fruit_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Variety'] !== null ? autolinker.link(feature.properties['Variety'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Row_num'] !== null ? autolinker.link(feature.properties['Row_num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Row_total'] !== null ? autolinker.link(feature.properties['Row_total'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Category'] !== null ? autolinker.link(feature.properties['Category'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Code1'] !== null ? autolinker.link(feature.properties['Code1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['path'] !== null ? autolinker.link(feature.properties['path'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Blockoverview_2_0(feature) {
+            switch(String(feature.properties['Orchard'])) {
+                case 'Apricot Corp.':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,119,208,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Blackman':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(176,213,82,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Boulton':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,231,179,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Browns':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,214,35,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Earnscleugh':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,100,180,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Eureka':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,165,217,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Packhouse':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,182,97,1.0)',
+                interactive: false,
+            }
+                    break;
+                case 'Pessione':
+                    return {
+                pane: 'pane_Blockoverview_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,41,49,1.0)',
+                interactive: false,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Blockoverview_2');
+        map.getPane('pane_Blockoverview_2').style.zIndex = 402;
+        map.getPane('pane_Blockoverview_2').style['mix-blend-mode'] = 'normal';
+        var layer_Blockoverview_2 = new L.geoJson(json_Blockoverview_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Blockoverview_2',
+            layerName: 'layer_Blockoverview_2',
+            pane: 'pane_Blockoverview_2',
+            onEachFeature: pop_Blockoverview_2,
+            style: style_Blockoverview_2_0,
+        });
+        bounds_group.addLayer(layer_Blockoverview_2);
+        map.addLayer(layer_Blockoverview_2);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Hinton Orchards, Earnscleugh</h2>';
+            };
+            title.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Block overview<br /><table><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_ApricotCorp0.png" /></td><td>Apricot Corp.</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Blackman1.png" /></td><td>Blackman</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Boulton2.png" /></td><td>Boulton</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Browns3.png" /></td><td>Browns</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Earnscleugh4.png" /></td><td>Earnscleugh</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Eureka5.png" /></td><td>Eureka</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Packhouse6.png" /></td><td>Packhouse</td></tr><tr><td style="text-align: center;"><img src="legend/Blockoverview_2_Pessione7.png" /></td><td>Pessione</td></tr></table>': layer_Blockoverview_2,'Fruit types<br /><table><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Apricot0.png" /></td><td>Apricot</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Bareland1.png" /></td><td>Bare land</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Barelandundeveloped2.png" /></td><td>Bare land - undeveloped</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Cherry3.png" /></td><td>Cherry</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Feijoa4.png" /></td><td>Feijoa</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Kiwifruit5.png" /></td><td>Kiwifruit</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Nectarine6.png" /></td><td>Nectarine</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Peach7.png" /></td><td>Peach</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Plum8.png" /></td><td>Plum</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Unknown9.png" /></td><td>Unknown</td></tr></table>': layer_Fruittypes_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Blockoverview_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Orchard'] !== null?String('<div style="color: #323232; font-size: 15pt; font-family: \'Liberation Sans\', sans-serif;">' + layer.feature.properties['Orchard']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Blockoverview_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Blockoverview_2]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Blockoverview_2]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Blockoverview_2]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Blockoverview_2]);
+        });
+        </script>
+    </body>
+</html>
