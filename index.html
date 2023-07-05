@@ -30,8 +30,8 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/Fruittypes_1.js"></script>
-        <script src="data/Blocks_2.js"></script>
+        <script src="data/Fruittypes_2.js"></script>
+        <script src="data/Blocks_3.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -57,10 +57,23 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_GoogleSatellite_0');
-        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
-        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleSatellite_0',
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        map.createPane('pane_GoogleSatellite_1');
+        map.getPane('pane_GoogleSatellite_1').style.zIndex = 401;
+        var layer_GoogleSatellite_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_1',
             opacity: 1.0,
             attribution: '',
             minZoom: 1,
@@ -68,9 +81,9 @@
             minNativeZoom: 0,
             maxNativeZoom: 22
         });
-        layer_GoogleSatellite_0;
-        map.addLayer(layer_GoogleSatellite_0);
-        function pop_Fruittypes_1(feature, layer) {
+        layer_GoogleSatellite_1;
+        map.addLayer(layer_GoogleSatellite_1);
+        function pop_Fruittypes_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -116,11 +129,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Fruittypes_1_0(feature) {
+        function style_Fruittypes_2_0(feature) {
             switch(String(feature.properties['Fruit_type'])) {
                 case 'Apricot':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -135,7 +148,7 @@
                     break;
                 case 'Bare land':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -150,7 +163,7 @@
                     break;
                 case 'Bare land - undeveloped':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -165,7 +178,7 @@
                     break;
                 case 'Cherry':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -180,7 +193,7 @@
                     break;
                 case 'Nectarine':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -195,7 +208,7 @@
                     break;
                 case 'Peach':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -210,7 +223,7 @@
                     break;
                 case 'Plum':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -225,7 +238,7 @@
                     break;
                 case 'Sundry':
                     return {
-                pane: 'pane_Fruittypes_1',
+                pane: 'pane_Fruittypes_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -240,21 +253,21 @@
                     break;
             }
         }
-        map.createPane('pane_Fruittypes_1');
-        map.getPane('pane_Fruittypes_1').style.zIndex = 401;
-        map.getPane('pane_Fruittypes_1').style['mix-blend-mode'] = 'normal';
-        var layer_Fruittypes_1 = new L.geoJson(json_Fruittypes_1, {
+        map.createPane('pane_Fruittypes_2');
+        map.getPane('pane_Fruittypes_2').style.zIndex = 402;
+        map.getPane('pane_Fruittypes_2').style['mix-blend-mode'] = 'normal';
+        var layer_Fruittypes_2 = new L.geoJson(json_Fruittypes_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Fruittypes_1',
-            layerName: 'layer_Fruittypes_1',
-            pane: 'pane_Fruittypes_1',
-            onEachFeature: pop_Fruittypes_1,
-            style: style_Fruittypes_1_0,
+            dataVar: 'json_Fruittypes_2',
+            layerName: 'layer_Fruittypes_2',
+            pane: 'pane_Fruittypes_2',
+            onEachFeature: pop_Fruittypes_2,
+            style: style_Fruittypes_2_0,
         });
-        bounds_group.addLayer(layer_Fruittypes_1);
-        map.addLayer(layer_Fruittypes_1);
-        function pop_Blocks_2(feature, layer) {
+        bounds_group.addLayer(layer_Fruittypes_2);
+        map.addLayer(layer_Fruittypes_2);
+        function pop_Blocks_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -277,11 +290,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Blocks_2_0(feature) {
+        function style_Blocks_3_0(feature) {
             switch(String(feature.properties['Orchard'])) {
                 case 'Apricot Corp.':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -296,7 +309,7 @@
                     break;
                 case 'Boulton':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -311,7 +324,7 @@
                     break;
                 case 'Browns':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -326,7 +339,7 @@
                     break;
                 case 'Earnscleugh':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -341,7 +354,7 @@
                     break;
                 case 'Eureka':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -356,7 +369,7 @@
                     break;
                 case 'Hill':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -371,7 +384,7 @@
                     break;
                 case 'Lower Hinton':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -386,7 +399,7 @@
                     break;
                 case 'Packhouse':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -401,7 +414,7 @@
                     break;
                 case 'Pessione':
                     return {
-                pane: 'pane_Blocks_2',
+                pane: 'pane_Blocks_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -416,20 +429,20 @@
                     break;
             }
         }
-        map.createPane('pane_Blocks_2');
-        map.getPane('pane_Blocks_2').style.zIndex = 402;
-        map.getPane('pane_Blocks_2').style['mix-blend-mode'] = 'normal';
-        var layer_Blocks_2 = new L.geoJson(json_Blocks_2, {
+        map.createPane('pane_Blocks_3');
+        map.getPane('pane_Blocks_3').style.zIndex = 403;
+        map.getPane('pane_Blocks_3').style['mix-blend-mode'] = 'normal';
+        var layer_Blocks_3 = new L.geoJson(json_Blocks_3, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Blocks_2',
-            layerName: 'layer_Blocks_2',
-            pane: 'pane_Blocks_2',
-            onEachFeature: pop_Blocks_2,
-            style: style_Blocks_2_0,
+            dataVar: 'json_Blocks_3',
+            layerName: 'layer_Blocks_3',
+            pane: 'pane_Blocks_3',
+            onEachFeature: pop_Blocks_3,
+            style: style_Blocks_3_0,
         });
-        bounds_group.addLayer(layer_Blocks_2);
-        map.addLayer(layer_Blocks_2);
+        bounds_group.addLayer(layer_Blocks_3);
+        map.addLayer(layer_Blocks_3);
             var title = new L.Control();
             title.onAdd = function (map) {
                 this._div = L.DomUtil.create('div', 'info');
@@ -441,30 +454,30 @@
             };
             title.addTo(map);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Blocks<br /><table><tr><td style="text-align: center;"><img src="legend/Blocks_2_ApricotCorp0.png" /></td><td>Apricot Corp.</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Boulton1.png" /></td><td>Boulton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Browns2.png" /></td><td>Browns</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Earnscleugh3.png" /></td><td>Earnscleugh</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Eureka4.png" /></td><td>Eureka</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Hill5.png" /></td><td>Hill</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_LowerHinton6.png" /></td><td>Lower Hinton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Packhouse7.png" /></td><td>Packhouse</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Pessione8.png" /></td><td>Pessione</td></tr></table>': layer_Blocks_2,'Fruit types<br /><table><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Apricot0.png" /></td><td>Apricot</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Bareland1.png" /></td><td>Bare land</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Barelandundeveloped2.png" /></td><td>Bare land - undeveloped</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Cherry3.png" /></td><td>Cherry</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Nectarine4.png" /></td><td>Nectarine</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Peach5.png" /></td><td>Peach</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Plum6.png" /></td><td>Plum</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Sundry7.png" /></td><td>Sundry</td></tr></table>': layer_Fruittypes_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'Blocks<br /><table><tr><td style="text-align: center;"><img src="legend/Blocks_3_ApricotCorp0.png" /></td><td>Apricot Corp.</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Boulton1.png" /></td><td>Boulton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Browns2.png" /></td><td>Browns</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Earnscleugh3.png" /></td><td>Earnscleugh</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Eureka4.png" /></td><td>Eureka</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Hill5.png" /></td><td>Hill</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_LowerHinton6.png" /></td><td>Lower Hinton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Packhouse7.png" /></td><td>Packhouse</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_3_Pessione8.png" /></td><td>Pessione</td></tr></table>': layer_Blocks_3,'Fruit types<br /><table><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Apricot0.png" /></td><td>Apricot</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Bareland1.png" /></td><td>Bare land</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Barelandundeveloped2.png" /></td><td>Bare land - undeveloped</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Cherry3.png" /></td><td>Cherry</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Nectarine4.png" /></td><td>Nectarine</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Peach5.png" /></td><td>Peach</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Plum6.png" /></td><td>Plum</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_2_Sundry7.png" /></td><td>Sundry</td></tr></table>': layer_Fruittypes_2,"Google Satellite": layer_GoogleSatellite_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
         setBounds();
         var i = 0;
-        layer_Blocks_2.eachLayer(function(layer) {
+        layer_Blocks_3.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Orchard'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Orchard']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Blocks_2'});
+            layer.bindTooltip((layer.feature.properties['Orchard'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Orchard']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Blocks_3'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_Blocks_2]);
+        resetLabels([layer_Blocks_3]);
         map.on("zoomend", function(){
-            resetLabels([layer_Blocks_2]);
+            resetLabels([layer_Blocks_3]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Blocks_2]);
+            resetLabels([layer_Blocks_3]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Blocks_2]);
+            resetLabels([layer_Blocks_3]);
         });
         </script>
     </body>
