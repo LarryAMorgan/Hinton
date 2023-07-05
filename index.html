@@ -50,7 +50,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[-45.262107144637795,169.26597682861544],[-45.210270767302276,169.3699199024778]]);
+        }).fitBounds([[-45.262108032539544,169.26597393963112],[-45.21026905740326,169.3699222216548]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -193,21 +193,6 @@
                 interactive: true,
             }
                     break;
-                case 'P/N':
-                    return {
-                pane: 'pane_Fruittypes_1',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(187,255,0,1.0)',
-                interactive: true,
-            }
-                    break;
                 case 'Peach':
                     return {
                 pane: 'pane_Fruittypes_1',
@@ -306,7 +291,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(212,22,127,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Boulton':
@@ -321,7 +306,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(149,121,235,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Browns':
@@ -336,7 +321,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(213,110,104,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Earnscleugh':
@@ -351,7 +336,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(15,208,218,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Eureka':
@@ -366,7 +351,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(197,28,227,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Hill':
@@ -381,7 +366,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(220,157,41,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Lower Hinton':
@@ -396,7 +381,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(72,211,50,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Packhouse':
@@ -411,7 +396,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(204,230,133,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'Pessione':
@@ -426,7 +411,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(120,158,229,1.0)',
-                interactive: true,
+                interactive: false,
             }
                     break;
             }
@@ -436,7 +421,7 @@
         map.getPane('pane_Blocks_2').style['mix-blend-mode'] = 'normal';
         var layer_Blocks_2 = new L.geoJson(json_Blocks_2, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_Blocks_2',
             layerName: 'layer_Blocks_2',
             pane: 'pane_Blocks_2',
@@ -456,7 +441,7 @@
             };
             title.addTo(map);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Blocks<br /><table><tr><td style="text-align: center;"><img src="legend/Blocks_2_ApricotCorp0.png" /></td><td>Apricot Corp.</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Boulton1.png" /></td><td>Boulton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Browns2.png" /></td><td>Browns</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Earnscleugh3.png" /></td><td>Earnscleugh</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Eureka4.png" /></td><td>Eureka</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Hill5.png" /></td><td>Hill</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_LowerHinton6.png" /></td><td>Lower Hinton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Packhouse7.png" /></td><td>Packhouse</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Pessione8.png" /></td><td>Pessione</td></tr></table>': layer_Blocks_2,'Fruit types<br /><table><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Apricot0.png" /></td><td>Apricot</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Bareland1.png" /></td><td>Bare land</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Barelandundeveloped2.png" /></td><td>Bare land - undeveloped</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Cherry3.png" /></td><td>Cherry</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Nectarine4.png" /></td><td>Nectarine</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_PN5.png" /></td><td>P/N</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Peach6.png" /></td><td>Peach</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Plum7.png" /></td><td>Plum</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Sundry8.png" /></td><td>Sundry</td></tr></table>': layer_Fruittypes_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'Blocks<br /><table><tr><td style="text-align: center;"><img src="legend/Blocks_2_ApricotCorp0.png" /></td><td>Apricot Corp.</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Boulton1.png" /></td><td>Boulton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Browns2.png" /></td><td>Browns</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Earnscleugh3.png" /></td><td>Earnscleugh</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Eureka4.png" /></td><td>Eureka</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Hill5.png" /></td><td>Hill</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_LowerHinton6.png" /></td><td>Lower Hinton</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Packhouse7.png" /></td><td>Packhouse</td></tr><tr><td style="text-align: center;"><img src="legend/Blocks_2_Pessione8.png" /></td><td>Pessione</td></tr></table>': layer_Blocks_2,'Fruit types<br /><table><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Apricot0.png" /></td><td>Apricot</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Bareland1.png" /></td><td>Bare land</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Barelandundeveloped2.png" /></td><td>Bare land - undeveloped</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Cherry3.png" /></td><td>Cherry</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Nectarine4.png" /></td><td>Nectarine</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Peach5.png" /></td><td>Peach</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Plum6.png" /></td><td>Plum</td></tr><tr><td style="text-align: center;"><img src="legend/Fruittypes_1_Sundry7.png" /></td><td>Sundry</td></tr></table>': layer_Fruittypes_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
         setBounds();
         var i = 0;
         layer_Blocks_2.eachLayer(function(layer) {
